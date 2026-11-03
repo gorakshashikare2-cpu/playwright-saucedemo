@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {z
+  await page.goto('https://todomvc.com/examples/react/dist/');
+  await page.getByTestId('text-input').click();
+  await page.getByTestId('text-input').fill('new1');
+  await page.getByTestId('text-input').press('Enter');
+  await page.getByTestId('text-input').fill('task');
+  await page.getByTestId('text-input').press('Enter');
+  await page.getByTestId('text-input').fill('ended');
+  await page.getByTestId('text-input').press('Enter');
+  await page.getByTestId('text-input').fill('new2');
+  await page.getByTestId('text-input').press('Enter');
+  await page.getByRole('listitem').filter({ hasText: 'new1' }).getByTestId('todo-item-toggle').check();
+  await page.getByRole('link', { name: 'Active' }).click();
+  await page.getByRole('listitem').filter({ hasText: 'task' }).getByTestId('todo-item-toggle').check();
+  await page.goto('https://todomvc.com/examples/react/dist/#/');
+  await page.getByTestId('text-input').click();
+  await page.getByRole('button', { name: 'Clear completed' }).click();
+  await page.getByTestId('text-input').click();
+  await page.getByTestId('text-input').check();
+  await page.getByTestId('text-input').check();
+  await page.getByTestId('text-input').click();
+  await page.getByRole('link', { name: 'React', exact: true }).click();
+  await page.goto('https://todomvc.com/examples/react/dist/#/');
+  await page.getByTestId('text-input').click();
+  await page.locator('html').click();
+  await page.getByTestId('text-input').dblclick();
+  await page.getByTestId('text-input').click();
+  await page.getByTestId('text-input').click();
+  await page.getByTestId('text-input').fill('dc');
+  await page.getByTestId('text-input').press('Enter');
+  await page.getByTestId('todo-item-toggle').check();
+  await page.getByRole('link', { name: 'Completed' }).click();
+  await page.getByRole('button', { name: 'Clear completed' }).click();
+});
